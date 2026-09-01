@@ -1,0 +1,41 @@
+//TC :- O(2N)  and  SC :- O(N)
+void left_rotate_by1(vector<int> &arr,int n){
+    vector<int> new_arr;
+    for(int i=0;i<n;i++){
+        new_arr.push_back(arr[i]);
+    }
+    int arr_index = 0;
+    for(int i=1;i<n;i++){
+        arr[arr_index] = new_arr[i];
+        arr_index++;
+    }
+    arr[n-1] = new_arr[0];
+
+    //Just for our check it is not needed in the problem given
+    for(int i=0;i<n;i++){
+        cout << arr[i] << " ";
+    }
+}
+//TC :- O(N)  and  SC :- O(1) => NO extra space 
+//SC for algorithm is O(N) bcoz u are modifying or using your given array
+void left_rotate_by1_1(vector<int> &arr,int n){
+    int temp = arr[0];
+    for(int i=0;i<n-1;i++){
+        arr[i] = arr[i+1];
+    }
+    arr[n-1] = temp;
+    
+    //Just for our check it is not needed in the problem given
+    for(int i=0;i<n;i++){
+        cout << arr[i] << " ";
+    }
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    left_rotate_by1_1(arr,n);
+}
