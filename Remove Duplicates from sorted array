@@ -1,0 +1,68 @@
+//Brute 
+int remove_dup(vector<int>& arr, int n) {
+    set<int> st;
+
+    for(int i = 0; i < n; i++) {
+        st.insert(arr[i]);
+    }
+
+    int ind = 0;
+
+    for(auto it : st) {
+        arr[ind] = it;
+        ind++;
+    }
+
+    return ind;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    cout << remove_dup(arr,n);
+}
+
+//My Solution
+int remove_dup1(vector<int> &arr,int n){
+    int index = 1;
+    for(int i=1;i<n;i++){
+        if(arr[i-1] != arr[i]){
+            arr[index] = arr[i];
+            index++;
+        }
+    }
+    return index;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    cout << remove_dup1(arr,n);
+}
+
+//Striver(variable name change only)
+int remove_dup2(vector<int> &arr,int n){
+    int i = 0;
+    for(int j=1;j<n;j++){
+        if(arr[i] != arr[j]){
+            arr[i+1] = arr[j];
+            i++;
+        }
+    }
+    return i+1;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    cout << remove_dup2(arr,n);
+}
