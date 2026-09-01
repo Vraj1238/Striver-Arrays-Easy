@@ -1,0 +1,48 @@
+//Brute
+//TC :- O(N*D)  and  SC :- O(1)
+void left_rotate_byd_1(vector<int> &arr,int n,int d){
+    for(int i=0;i<d;i++){
+        int temp = arr[0];
+        for(int j=0;j<n-1;j++){
+            arr[j] = arr[j+1];
+        }
+        arr[n-1] = temp;
+    }
+}
+//Better
+//TC :- O(N+D)  and  SC :- O(N)
+void left_rotate_byd_2(vector<int> &arr,int n,int d){
+    d = d % n;
+    vector<int> temp(d);
+    for(int i=0;i<d;i++){
+        temp[i] = arr[i]; 
+    }
+    for(int i=d;i<n;i++){
+        arr[i-d] = arr[i];
+    }
+    for(int i=n-d;i<n;i++){
+        arr[i] = temp[i-(n-d)];
+    }
+}
+//Optimal
+////TC :- O(2N)  and  SC :- O(1)
+void left_rotate_byd_3(vector<int> &arr,int n,int d){
+    d = d % n;
+    reverse(arr.begin(), arr.begin() + d);
+    reverse(arr.begin() + d, arr.end());
+    reverse(arr.begin(), arr.end());
+}
+int main(){
+    int n;
+    cin >> n;
+    int d;
+    cin >> d;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
+    }
+    left_rotate_byd_3(arr,n,d);
+    for(int i=0;i<n;i++){
+            cout << arr[i] << " ";
+    }
+}
