@@ -1,0 +1,58 @@
+//Brute
+//TC :- O(N*N)  and  SC :- O(1)
+int find_missing_1(vector<int> &arr, int n){
+    for(int i = 0; i <= n; i++){    
+        int flag = 0;
+        for(int j = 0; j < n; j++){
+            if(arr[j] == i){
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0)
+            return i;
+    }
+    return -1;
+}
+//Better
+//TC :- O(2N)  and  SC :- O(N)
+int find_missing_2(vector<int> &arr, int n){
+    vector<int> hash(n + 1, 0); //create array with 1 extra space 
+    for(int i = 0; i < n; i++){
+        hash[arr[i]]++;
+    }
+    for(int i = 0; i <= n; i++){
+        if(hash[i] == 0)
+            return i;
+    }
+    return -1;
+}
+//Optimal
+//TC :- O(N)  and  SC :- O(1)
+int find_missing_sum(vector<int> &arr, int n){
+    int sum = n * (n + 1) / 2;
+    for(int i = 0; i < n; i++){
+        sum -= arr[i];
+    }
+    return sum;
+}
+//Optimal
+//TC :- O(N)  and  SC :- O(1)        converted from O(2N) to O(N) by removing extra loop
+int find_missing_XOR(vector<int> &arr, int n){
+    int xor1 = 0;
+    int xor2 = 0;
+    for(int i = 0; i < n; i++){
+        xor1 = xor1 ^ arr[i];
+        xor2 = xor2 ^ (i + 1);
+    }
+    return xor1 ^ xor2;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    cout << find_missing_XOR(arr, n);
+}
