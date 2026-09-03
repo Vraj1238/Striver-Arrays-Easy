@@ -1,0 +1,26 @@
+//Optimal
+//TC :- O(N)  and  SC :- O(1)
+int max_one(vector<int> &arr, int n){
+    int main_count = 0;
+    int count = 0;
+    for(int i = 0; i < n; i++){
+        if(arr[i] == 1){
+            count++;
+            if(count > main_count)
+                main_count = count;
+        }
+        else{
+            count = 0;
+        }
+    }
+    return main_count;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    cout << max_one(arr, n);
+}
