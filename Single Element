@@ -1,0 +1,67 @@
+//Brute
+//TC :- O(N*N)  and  SC :- O(1)
+int find_single(vector<int> &arr, int n){
+    for(int i = 0; i < n; i++){
+        int count = 0;
+        for(int j = 0; j < n; j++){
+            if(arr[i] == arr[j])
+                count++;
+        }
+        if(count == 1)
+            return arr[i];
+    }
+    return -1;
+}
+//Better
+//TC :- O(3N)  SC :-O(Max element) 
+int find_single_1(vector<int> &arr, int n){  
+    // Find maximum element
+    int maxi = 0;
+    for(int i = 0; i < n; i++){
+        maxi = max(maxi, arr[i]);
+    }
+    // Create hash array
+    int hash[maxi + 1] = {0};
+    // Store frequency
+    for(int i = 0; i < n; i++){
+        hash[arr[i]]++;
+    }
+    // Find element appearing once
+    for(int i = 0; i < n; i++){
+        if(hash[arr[i]] == 1)
+            return arr[i];
+    }
+    return -1;
+}
+//Better
+//TC :- O(NlogM) + O(N/2 + 1)  SC :-O(N/2 + 1)    
+//M = N/2 + 1 (Number of distinct elements)
+int find_single_2(vector<int> &arr, int n){
+    map<int, int> mpp;
+    for(int i = 0; i < n; i++){
+        mpp[arr[i]]++;
+    }
+    for(auto it : mpp){
+        if(it.second == 1)
+            return it.first;
+    }
+    return -1;
+}
+//Optimal
+//TC :- O(N)  SC :-O(1)
+int find_single_3(vector<int> &arr, int n){
+    int xorr = 0;
+    for(int i=0;i<n;i++){
+        xorr = xorr^arr[i];
+    }
+    return xorr;
+}
+int main(){
+    int n;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    cout << find_single_3(arr, n);
+}
