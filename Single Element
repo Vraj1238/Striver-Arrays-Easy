@@ -34,6 +34,16 @@ int find_single_1(vector<int> &arr, int n){
         if(hash[arr[i]] == 1)
             return arr[i];
     }
+    //Other way
+    //arr = [1,1,3,4,3,4,2]
+    //above trick O(7) and current trick O(4)
+    //arr[1,1,3,4,8,8,3]
+    //current trick O(8)
+    //So it depends
+    // for(int i = mini; i <= maxi; i++){
+    //     if(hash[i] == 1)
+    //         return i;
+    // }
     return -1;
 }
 //Better
