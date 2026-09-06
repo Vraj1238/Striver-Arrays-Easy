@@ -14,6 +14,8 @@ int find_single(vector<int> &arr, int n){
 }
 //Better
 //TC :- O(3N)  SC :-O(Max element) 
+//It is better for arrays which are not extremely large.
+//REASON :- arr = [2, 2, 2, 2, 100000000] 
 int find_single_1(vector<int> &arr, int n){  
     // Find maximum element
     int maxi = 0;
@@ -21,6 +23,7 @@ int find_single_1(vector<int> &arr, int n){
         maxi = max(maxi, arr[i]);
     }
     // Create hash array
+    //Depends on the maximum value, not the number of elements.
     int hash[maxi + 1] = {0};
     // Store frequency
     for(int i = 0; i < n; i++){
